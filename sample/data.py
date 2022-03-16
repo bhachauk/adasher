@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 
-from adasher.data_utils import time_period
+from ..adasher.data_utils import time_period
 from datetime import datetime, timedelta
 
 
