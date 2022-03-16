@@ -1,0 +1,3 @@
+- [x] Basic Analytics stats
+- [x] Auto analytics with templates
+- [ ] Event driven analytics
