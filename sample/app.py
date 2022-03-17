@@ -4,7 +4,7 @@ import os
 import dash_bootstrap_components as dbc
 from dash import Input, Output, html, dcc
 
-from ..adasher.elements import header
+from adasher.elements import header
 from sample import stats
 
 import logging

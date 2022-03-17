@@ -2,11 +2,11 @@ from dash import html, dcc
 import pandas as pd
 
 
-from ..adasher.elements.impl import number, number_with_diff, stats_from_df
-from ..adasher.cards import card, container, CardHeaderStyles
-from ..adasher.templates import pie_plot, bar_plot, scatter_plot
-from ..adasher import templates
-from ..adasher.advanced import auto_analytics
+from adasher.elements.impl import number, number_with_diff, stats_from_df
+from adasher.cards import card, container, CardHeaderStyles
+from adasher.templates import pie_plot, bar_plot, scatter_plot
+from adasher import templates
+from adasher.advanced import auto_analytics
 from . import data
 
 
