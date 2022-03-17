@@ -1,5 +1,4 @@
-from adasher.cards.__card_impl import card
-from adasher.cards.__card_impl import container
-from adasher.elements.util import CardHeaderStyles
+from .__card_impl import card
+from .__card_impl import container
 
 
