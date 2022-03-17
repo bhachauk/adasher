@@ -1,6 +1,7 @@
 import dash_bootstrap_components as dbc
 from dash import html, dcc
 import pandas as pd
+from adasher.elements.styles import CardHeaderStyles, NumberHeaderStyles
 
 
 class Colors:
@@ -142,12 +143,6 @@ class S1Elem(Elem):
         return _result
 
 
-class NumberHeaderStyles:
-    BASIC_BLACK = 'BASIC_BLACK'
-    GRAY = 'GRAY'
-    RED = 'GRAY'
-
-
 def get_number_header(header, _style):
 
     basic_style = {'color': Colors.BLACK, 'font-size': '12px', 'margin': '15px', 'padding': '10px'}
@@ -168,13 +163,6 @@ def get_number_header(header, _style):
     _title = Title(header=header)
     _title.title_style = basic_style
     return _title.get_div()
-
-
-class CardHeaderStyles:
-
-    BASIC_BROWN = 'BASIC_BROWN'
-    WHITE_FONT_BLACK_BG = 'WHITE_FONT_BLACK_BG'
-    BLACK_FONT_GRAY_BG = 'BLACK_FONT_GRAY_BG'
 
 
 def get_card_header_impl() -> dict:

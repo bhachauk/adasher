@@ -1,1 +1,1 @@
-from .__util import auto_analytics
+from adasher.advanced.__util import auto_analytics

@@ -1,5 +1,5 @@
 from os import path
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 this_directory = path.abspath(path.dirname(__file__))
@@ -19,7 +19,7 @@ setup(name='adasher',
       author='Bhanuchander Udhayakumar',
       author_email='bhanuchander210@gmail.com',
       license='MIT',
-      packages=['adasher'],
+      packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
       install_requires=required

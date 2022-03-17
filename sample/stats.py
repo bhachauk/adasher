@@ -2,12 +2,16 @@ from dash import html, dcc
 import pandas as pd
 
 
-from adasher.elements.impl import number, number_with_diff, stats_from_df
-from adasher.cards import card, container, CardHeaderStyles
+from adasher.elements import number, number_with_diff, CardHeaderStyles
+from adasher.cards import card, container, stats_from_df
+
 from adasher.templates import pie_plot, bar_plot, scatter_plot
 from adasher import templates
 from adasher.advanced import auto_analytics
+
 from . import data
+
+_hs = CardHeaderStyles.BLACK_FONT_GRAY_BG
 
 
 def get_stats_content():
@@ -31,46 +35,47 @@ def get_py_markdown(code_text):
 
 
 def number_1():
-    return card("Basic Number", [number(12)])
+    return card("Basic Number", [number(12)], _hs)
 
 
 def number_2():
-    return card("Number with style", [number(12, number_style={'font-size': '30px', 'margin': '15px', 'color': 'red'})])
+    return card("Number with style", [number(12, number_style={'font-size': '30px', 'margin': '15px', 'color': 'red'})], _hs)
 
 
 def number_3():
-    return card("Number with header", [number(-12, number_style={'font-size': '30px', 'margin': '15px', 'color': 'green'}, header_text='Number')])
+    return card("Number with header", [number(-12, number_style={'font-size': '30px', 'margin': '15px', 'color': 'green'}, header_text='Number')], _hs)
 
 
 def number_4():
-    return card("Number with header/style/info", [number(-12, number_style={"color": 'coral'}, info='All', header_text='Number')])
+    return card("Number with header/style/info", [number(-12, number_style={"color": 'coral'}, info='All', header_text='Number')], _hs)
 
 
 def number_with_diff_1():
-    return card("Number Diff 1", [number_with_diff(10, 12, '+ impact fall')])
+    return card("Number Diff 1", [number_with_diff(10, 12, '+ impact fall')], _hs)
 
 
 def number_with_diff_2():
-    return card("Number Diff 2", [number_with_diff(12, 10, '+ impact raise')])
+    return card("Number Diff 2", [number_with_diff(12, 10, '+ impact raise')], _hs)
 
 
 def number_with_diff_3():
-    return card("Number Diff 3", [number_with_diff(10, 12, '- impact fall', is_positive_impact=False)])
+    return card("Number Diff 3", [number_with_diff(10, 12, '- impact fall', is_positive_impact=False)], _hs)
 
 
 def number_with_diff_4():
     return card("Number Diff 4", [number_with_diff(12, 10, '- impact raise 1', is_positive_impact=False, header='Num 1'),
-                                  number_with_diff(15, 10, '- impact raise 1', is_positive_impact=False, header='Num 2')])
+                                  number_with_diff(15, 10, '- impact raise 1', is_positive_impact=False, header='Num 2')],
+                _hs)
 
 
 def stats_using_df_1():
     df = pd.DataFrame({'Metric': ['A', 'B', 'C'], 'T1': [3, 4, 8], 'T2': [4, 5, 7]})
-    return stats_from_df(df, 'T1', 'T2', 'Metric')
+    return stats_from_df(df, 'T1', 'T2', 'Metric', header='Metric Header', header_style=_hs)
 
 
 def stats_using_df_2():
     df = pd.DataFrame({'Metric': ['A', 'B', 'C'], 'T1': [3, 4, 8], 'T2': [4, 5, 7]})
-    return stats_from_df(df, 'T1', 'T2', 'Metric', is_positive_impact=False)
+    return stats_from_df(df, 'T1', 'T2', 'Metric', is_positive_impact=False, header='Metric Header', header_style=_hs)
 
 
 def get_stats_with_plots_content():
@@ -88,28 +93,28 @@ def stats_plot_1():
     df = pd.DataFrame({'name': ['A', 'B'], 'value': [3, 4]})
     return card('Stats pie plot', [number_with_diff(3, 4, 'info A', header='A'),
                                    number_with_diff(12, 14, 'info B', header='B'),
-                                   pie_plot(df, label='name', value='value')])
+                                   pie_plot(df, label='name', value='value')], _hs)
 
 
 def stats_plot_2():
     df = pd.DataFrame({'name': ['A', 'B'], 'value': [3, 4]})
     return card('Stats bar plot', [number_with_diff(3, 4, 'info A', header='A'),
                                    number_with_diff(12, 14, 'info B', header='B'),
-                                   bar_plot(df, x='name', y='value')])
+                                   bar_plot(df, x='name', y='value')], _hs)
 
 
 def stats_plot_3():
     df = pd.DataFrame({'name': ['A', 'B'], 'value': [3, 4]})
     return card('Stats scatter plot', [number_with_diff(3, 4, 'info A', header='A'),
                                    number_with_diff(12, 14, 'info B', header='B'),
-                                   scatter_plot(df, x='name', y='value')])
+                                   scatter_plot(df, x='name', y='value')], _hs)
 
 
 def stats_plot_4():
     df = pd.DataFrame({'name': ['A', 'B', 'A', 'B'], 'value': [3, 4, 5, 6], 'group': ['X', 'X', 'Y', 'Y']})
     return card('Stats scatter group plot', [number_with_diff(3, 4, 'info A', header='A'),
                                    number_with_diff(12, 14, 'info B', header='B'),
-                                   scatter_plot(df, x='name', y='value', group='group')])
+                                   scatter_plot(df, x='name', y='value', group='group')], _hs)
 
 
 def get_style_content():

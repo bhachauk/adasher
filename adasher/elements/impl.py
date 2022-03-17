@@ -1,8 +1,5 @@
-from .util import Header, Info
-from .util import S1DiffElem, S1Elem
-
-from adasher.cards import card, container
-import pandas as pd
+from adasher.elements.util import Header, Info
+from adasher.elements.util import S1DiffElem, S1Elem
 
 
 def header(text, align='center'):
@@ -28,13 +25,3 @@ def number_with_diff(val, prev_val, info: str, is_positive_impact=True, header=N
     :return:
     """
     return S1DiffElem(val, prev_val, info, is_positive_impact, header=header, header_style=header_style).get_div()
-
-
-def stats_from_df(df: pd.DataFrame, current_column, previous_column, label, is_positive_impact=True):
-
-    result = list()
-    for _, _row in df.iterrows():
-        result.append(number_with_diff(_row[current_column], _row[previous_column], '', header=_row[label],
-                                       is_positive_impact=is_positive_impact))
-
-    return card(label, result)

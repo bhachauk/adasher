@@ -1,7 +1,8 @@
-from ..elements.util import Elem
-from ..elements import util as elem_util
+from adasher.elements.util import Elem
+from adasher.elements import util as elem_util, impl as elem_impl
 from dash import html
 import dash_bootstrap_components as dbc
+import pandas as pd
 
 
 def card(_header: str, _elems: list, header_style: str = None):
@@ -14,6 +15,17 @@ def card(_header: str, _elems: list, header_style: str = None):
 def container(cards: list, title=None):
     container_content = [dbc.Row([dbc.Col(card, width=w) for card, w in row], justify='center', style={'margin': '25px'}) for row in cards]
     return dbc.Container(container_content, fluid=True)
+
+
+def stats_from_df(df: pd.DataFrame, current_column, previous_column, label, is_positive_impact=True, header: str = None,
+                  header_style: str = None):
+
+    result = list()
+    for _, _row in df.iterrows():
+        result.append(elem_impl.number_with_diff(_row[current_column], _row[previous_column], '', header=_row[label],
+                                                 is_positive_impact=is_positive_impact))
+    __header = header_style if header else label
+    return card(label, result, header_style=header_style)
 
 
 class Card(Elem):

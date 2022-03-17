@@ -1,7 +1,6 @@
-from ..elements.util import Elem, Colors
-from ..data_utils.__util import Period, Periods, DF, Names, DATE_FORMAT, DATE_HOUR_FORMAT
-from ..cards import card, container
-from ..elements.impl import number, number_with_diff, stats_from_df
+from adasher.elements.util import Elem, Colors
+from adasher.data_utils.__util import Period, Periods, DF, Names, DATE_FORMAT, DATE_HOUR_FORMAT
+from adasher.cards import card, stats_from_df
 
 import pandas as pd
 import dash_bootstrap_components as dbc
@@ -114,6 +113,9 @@ class Template:
                  header: str = None, header_style: str = None):
 
         # Handling invalids
+
+        if _df.empty:
+            raise Exception('Dataframe cannot be empty for auto_analytics')
 
         if len(date_column) < 2:
             raise Exception("date_column field expected to be tuple with length 2 like: ('column_name', 'ms')")

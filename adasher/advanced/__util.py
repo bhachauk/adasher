@@ -1,8 +1,8 @@
 import pandas as pd
 
-from ..data_utils.__util import DF, Period, Periods
-from ..templates import *
-from ..templates.__util import Template, GrowthPieBarTemplate, GrowthPieBarTrendTemplate
+from adasher.data_utils.__util import DF, Period, Periods
+from adasher.templates import *
+from adasher.templates.__util import Template, GrowthPieBarTemplate, GrowthPieBarTrendTemplate
 
 
 def auto_analytics(_df: pd.DataFrame, by, date_column: tuple, target_period: Period, compare_period: str = None,

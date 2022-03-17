@@ -10,6 +10,16 @@ Dash with Analytics based components
 pip install adasher
 ```
 
-## Dash result
+## Dash results
+
+### Stats
+![adasher_stats](https://raw.githubusercontent.com/Bhanuchander210/adasher/main/data/adasher_stats.png)
+
+
+### Stats with plots
+![adasher_stats_plots](https://raw.githubusercontent.com/Bhanuchander210/adasher/main/data/adsher_stats_plot.png)
+
+
+### Advanced
 
 ![auto_analytics](https://raw.githubusercontent.com/Bhanuchander210/adasher/main/data/auto_analytics.png)
