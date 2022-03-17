@@ -136,9 +136,8 @@ def header_3():
 
 def get_advanced_stats_content():
     content = [
-        # [(advanced_1(), 12)],
-        # [(advanced_2(), 12)],
-
+        [(advanced_1(), 12)],
+        [(advanced_2(), 12)],
         [(advanced_3(), 12)],
     ]
 
