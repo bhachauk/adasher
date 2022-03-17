@@ -1,5 +1,7 @@
 # ADasher - Analytics Dash
 
+[![status](https://api.travis-ci.com/bhanuchander210/adasher.png)](https://travis-ci.com/github/Bhanuchander210/adasher)
+
 Dash with Analytics based components
 
 ## Installation
