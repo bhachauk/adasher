@@ -23,3 +23,8 @@ pip install adasher
 ### Advanced
 
 ![auto_analytics](https://raw.githubusercontent.com/Bhanuchander210/adasher/main/data/auto_analytics.png)
+
+
+## Adasher dash examples
+
+- [Sample app using heroku](https://adasher.herokuapp.com/)
