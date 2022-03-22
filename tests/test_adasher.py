@@ -1,6 +1,6 @@
 from adasher.elements.impl import header
 from adasher.advanced import auto_analytics
-from adasher.data_utils import time_period
+from adasher.data_utils import time_period, Periods
 from datetime import datetime, timedelta
 import pandas as pd
 import pytest
@@ -8,6 +8,14 @@ import pytest
 
 def test_header():
     assert header('Test') is not None
+
+
+def test_periods_impl():
+    _period = time_period(datetime.now() - timedelta(days=1), datetime.now(), 'test')
+    _prv_period = Periods.get_prev_period(_period)
+
+    assert _prv_period.end == _period.start
+    assert _period.get_elps_sec() == _period.get_elps_sec()
 
 
 def test_auto_analytics():

@@ -7,7 +7,7 @@ from adasher.cards import card, container, stats_from_df
 
 from adasher.templates import pie_plot, bar_plot, scatter_plot
 from adasher import templates
-from adasher.advanced import auto_analytics
+from adasher.advanced import auto_analytics, association
 
 from . import data
 
@@ -144,6 +144,8 @@ def get_advanced_stats_content():
         [(advanced_1(), 12)],
         [(advanced_2(), 12)],
         [(advanced_3(), 12)],
+        [(association_1(), 12)],
+        [(association_2(), 12)],
     ]
 
     result = list()
@@ -176,3 +178,21 @@ def advanced_3():
                           compare_period=data.jan_period,
                           header='Growth Pie Bar Trend : February 2022 EQ Stats {} vs {}'.format(data.feb_period.name, data.jan_period.name),
                           template=templates.GROWTH_PIE_BAR_TREND, header_style=CardHeaderStyles.WHITE_FONT_BLACK_BG)
+
+
+def association_1():
+    _df = data.get_eq_data()
+    _df[data.MAG] = _df[data.MAG].astype(int).astype(str)
+    _df = _df[[data.MAG, data.TIME]]
+    return association(_df, (data.TIME, data.TIME_FORMAT), time_period=None,
+                       header='Association Table: February 2022 EQ data'.format(data.feb_period.name, data.jan_period.name),
+                       header_style=CardHeaderStyles.WHITE_FONT_BLACK_BG)
+
+
+def association_2():
+    _df = data.get_eq_data()
+    _df[data.MAG] = _df[data.MAG].astype(int).astype(str)
+    _df = _df[[data.MAG, data.TIME]]
+    return association(_df, (data.TIME, data.TIME_FORMAT), time_period=None,
+                       header='Association Table with column prefix: February 2022 EQ data'.format(data.feb_period.name, data.jan_period.name),
+                       header_style=CardHeaderStyles.WHITE_FONT_BLACK_BG, apply_column_prefix=True)

@@ -21,10 +21,11 @@ class Names:
     COLOR = 'COLOR'
 
     DAY = 'DAY'
-    HOUR= 'HOUR'
+    HOUR = 'HOUR'
     TIME_UNIT = 'CUSTOM__TIME_UNIT'
     DATE = 'DATE'
     HOVER = 'HOVER'
+    SESSION = 'SESSION'
 
 
 class TimePeriods:
@@ -88,6 +89,11 @@ class Periods:
         return Period(period.start - _elapsed, period.start, name)
 
 
+class SessionBinConfig:
+    BIN_HOUR = [0, 4, 8, 12, 16, 20, 24]
+    BIN_LABEL = ['Late_Night', 'Early_Morning', 'Morning', 'Noon', 'Evening', 'Night']
+
+
 class DF:
 
     """
@@ -117,15 +123,18 @@ class DF:
         if self._dt_cols is None or column_name not in self._dt_cols.keys():
             raise Exception("datetime not configured for column_name : " + column_name)
 
-    def __get_df(self, _time_col, period: Period):
+    def get_df(self):
+        return self._df
+
+    def get_df_by(self, _time_col, period: Period):
         return self._df[((self._df[_time_col].astype(np.int64) / int(1e6)) >= period.start.timestamp() * 1000) & ((self._df[_time_col].astype(np.int64) / int(1e6)) < period.end.timestamp() * 1000)]
 
     def __get_df_group_count(self, col, _time_col, period: Period):
-        _df = self.__get_df(_time_col, period)
+        _df = self.get_df_by(_time_col, period)
         return _df[[col]].groupby([col]).size().reset_index(name=period.name)
 
     def get_date_trend_df(self, col, _time_col, period: Period, date_time_fmt=DATE_FORMAT):
-        _df = self.__get_df(_time_col, period)
+        _df = self.get_df_by(_time_col, period)
         _df[Names.TIME_UNIT] = _df[_time_col].dt.strftime(date_time_fmt)
         return _df[[Names.TIME_UNIT, col]].groupby([Names.TIME_UNIT, col]).size().reset_index(name=period.name).rename(columns={Names.TIME_UNIT: Names.DATE})
 
@@ -173,4 +182,18 @@ class DF:
 
         if time_period not in (list(tp_dict.keys()) + list(tp_dict.values())):
             raise Exception("Invalid time_period " + time_period)
+
+    def apply_day_session(self, time_column, day=True, session=True, hour=False):
+
+        self._df[Names.HOUR] = self._df[time_column].dt.hour
+
+        if day:
+            self._df[Names.DAY] = self._df[time_column].dt.day_name()
+
+        if session:
+            self._df[Names.SESSION] = pd.cut(self._df[Names.HOUR], bins=SessionBinConfig.BIN_HOUR,
+                                             labels=SessionBinConfig.BIN_LABEL, include_lowest=True)
+
+        if not hour:
+            del self._df[Names.HOUR]
 
