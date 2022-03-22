@@ -148,6 +148,8 @@ class Template:
         return __df
 
     def get_card(self):
+        if self.header is None:
+            return html.Div(children=self._get_content())
         return card(self.header, self._get_content(), header_style=self.header_style)
 
 

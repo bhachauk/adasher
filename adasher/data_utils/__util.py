@@ -85,7 +85,7 @@ class Periods:
     def get_prev_period(period: Period, name: str = None):
         _elapsed = period.end - period.start
         name = name if name else 'prev_' + period.name
-        return Period(period.start - _elapsed, period.end, name)
+        return Period(period.start - _elapsed, period.start, name)
 
 
 class DF:
