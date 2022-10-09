@@ -31,4 +31,5 @@ pip install adasher
 git clone https://github.com/Bhanuchander210/adasher.git
 cd adasher
 export PYTHONPATH=$PYTHONPATH:$(pwd)
+python sample/app.py
 ```
