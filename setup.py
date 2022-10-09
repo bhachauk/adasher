@@ -11,7 +11,7 @@ with open('adasher_requirements.txt') as f:
     required = f.read().splitlines()
 
 setup(name='adasher',
-      version='0.0.2',
+      version='0.0.3',
       long_description=long_description,
       long_description_content_type='text/markdown',
       description='Dash with analytics utilities',
