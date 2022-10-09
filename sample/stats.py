@@ -85,7 +85,7 @@ def get_stats_with_plots_content():
     ]
 
     result = list()
-    result.append(container(content, 'Number with plot'))
+    result.append(container(content, html.H5('Number with plots', style={'margin': '5px'})))
     return result
 
 
@@ -123,7 +123,7 @@ def get_style_content():
     ]
 
     result = list()
-    result.append(container(content, 'Number with plot'))
+    result.append(container(content))
     return result
 
 
@@ -149,7 +149,7 @@ def get_advanced_stats_content():
     ]
 
     result = list()
-    result.append(container(content, 'Number with plot'))
+    result.append(container(content))
     return result
 
 

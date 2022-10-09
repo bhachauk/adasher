@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 
 
-def card(_header: str, _elems: list, header_style: str = None):
+def card(_header, _elems: list, header_style=None):
     _card = Card(header=_header, header_style=header_style)
     for _elem in _elems:
         _card.append(_elem)
@@ -14,18 +14,18 @@ def card(_header: str, _elems: list, header_style: str = None):
 
 def container(cards: list, title=None):
     container_content = [dbc.Row([dbc.Col(card, width=w) for card, w in row], justify='center', style={'margin': '25px'}) for row in cards]
+    if title:
+        container_content = [title] + container_content
     return dbc.Container(container_content, fluid=True)
 
 
 def stats_from_df(df: pd.DataFrame, current_column, previous_column, label, is_positive_impact=True, header: str = None,
                   header_style: str = None):
-
     result = list()
     for _, _row in df.iterrows():
         result.append(elem_impl.number_with_diff(_row[current_column], _row[previous_column], '', header=_row[label],
                                                  is_positive_impact=is_positive_impact))
-    __header = header_style if header else label
-    return card(label, result, header_style=header_style)
+    return card(header if header else label, result, header_style=header_style)
 
 
 class Card(Elem):
@@ -59,7 +59,8 @@ class Card(Elem):
     def __get_header_template(self) -> elem_util.Title:
 
         if isinstance(self.header_style, dict):
-            _title = elem_util.Title(header=self.header)
+            if self.header is not None:
+                _title = elem_util.Title(header=self.header)
             _title.title_style = self.header_style
             return _title
 

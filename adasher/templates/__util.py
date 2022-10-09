@@ -110,7 +110,7 @@ class ScatterGroupPlotElem(PlotElem):
 class Template:
 
     def __init__(self, _df: pd.DataFrame, by, date_column: tuple, target_period: Period, compare_period: Period = None,
-                 header: str = None, header_style: str = None):
+                 header: str = None, header_style: str = None, template_args: dict = None):
 
         # Handling invalids
 
@@ -132,9 +132,11 @@ class Template:
         self._diff_df = self._adf.get_diff_df_by(by, self.date_col_name, target_period, compare_period)
         self.header = header
         self.header_style = header_style
+        self.template_args = template_args if template_args else dict()
 
     def _get_stats_from_df(self):
-        return stats_from_df(self._diff_df, self.target_period.name, self.compare_period.name, self.col_name)
+        return stats_from_df(self._diff_df, self.target_period.name, self.compare_period.name, self.col_name,
+                             **self.template_args)
 
     def _get_content(self):
         return [
@@ -156,8 +158,8 @@ class Template:
 class GrowthPieBarTemplate(Template):
 
     def __init__(self, _df: pd.DataFrame, by, date_column: tuple, target_period: Period, compare_period: Period = None,
-                 header: str = None, header_style: str = None):
-        Template.__init__(self, _df, by, date_column, target_period, compare_period, header, header_style)
+                 header: str = None, header_style: str = None, template_args:dict = None):
+        Template.__init__(self, _df, by, date_column, target_period, compare_period, header, header_style, template_args)
 
     def _get_content(self):
         _pie_layout = {'title_text': self.col_name}
@@ -175,8 +177,8 @@ class GrowthPieBarTemplate(Template):
 class GrowthPieBarTrendTemplate(Template):
 
     def __init__(self, _df: pd.DataFrame, by, date_column: tuple, target_period: Period, compare_period: Period = None,
-                 header: str = None, date_time_format: str = None, header_style: str = None):
-        Template.__init__(self, _df, by, date_column, target_period, compare_period, header, header_style)
+                 header: str = None, date_time_format: str = None, header_style: str = None, template_args:dict = None):
+        Template.__init__(self, _df, by, date_column, target_period, compare_period, header, header_style, template_args)
         self._trend_df = self.get_trend_df(date_time_format)
 
     def _get_content(self):

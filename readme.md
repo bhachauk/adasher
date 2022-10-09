@@ -25,6 +25,10 @@ pip install adasher
 ![auto_analytics](https://raw.githubusercontent.com/Bhanuchander210/adasher/main/data/auto_analytics.png)
 
 
-## Adasher dash examples
+## Run local sample
 
-- [Sample app using heroku](https://adasher.herokuapp.com/)
+```
+git clone https://github.com/Bhanuchander210/adasher.git
+cd adasher
+export PYTHONPATH=$PYTHONPATH:$(pwd)
+```
